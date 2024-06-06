@@ -1,8 +1,8 @@
 <base target="_blank"/>
 
-# Transformer for Image Harmonization and Beyond
+# FSFHarmony: Towards Spatio-Temporal Consistency for Video Harmonization via Frequency-Spatial Fusion
 
-Here we provide the PyTorch implementation and pre-trained model of our latest version, if you require the code of our previous ICCV version (**["Image Harmonization With Transformer"](https://openaccess.thecvf.com/content/ICCV2021/papers/Guo_Image_Harmonization_With_Transformer_ICCV_2021_paper.pdf)**), please click the **[released version](https://github.com/zhenglab/HarmonyTransformer/releases/tag/v1.0)**.
+Here we provide the PyTorch implementation and pre-trained model of our latest version.
 
 ## Prerequisites
 
@@ -11,43 +11,31 @@ Here we provide the PyTorch implementation and pre-trained model of our latest v
 - CPU or NVIDIA GPU + CUDA CuDNN
 
 ## Train/Test
-- Download [iHarmony4](https://github.com/bcmi/Image-Harmonization-Dataset-iHarmony4) dataset.
+- Download [HYouTube](https://github.com/bcmi/Video-Harmonization-Dataset-HYouTube) dataset.
 
-- Train our HT model (**FC-TRE-DeCNN**):
+- Train our FSFHarmony model:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python train.py --model ht --tr_r_enc_head x --tr_r_enc_layers x --name experiment_name --dataset_root <dataset_dir> --dataset_name IHD --batch_size xx --init_port xxxx
+CUDA_VISIBLE_DEVICES=0 python train.py --model fssingleout --netG s_apswin_t_sgt_f3Dfourier --name experiment_name --dataset_root <dataset_dir> --dataset_mode hytall --batch_size xx --init_port xxxx --n_frames 5 --loss_T --loss_AP --save_iter_model
 ```
-- Test our HT model (**FC-TRE-DeCNN**):
+- Test our FSFHarmony model:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python test.py --model ht --tr_r_enc_head x --tr_r_enc_layers x --name experiment_name --dataset_root <dataset_dir> --dataset_name IHD --batch_size xx --init_port xxxx
-```
-
-- Train our **CNN-DHT** model:
-```bash
-CUDA_VISIBLE_DEVICES=0 python train.py --model dht --light_use_mask --tr_r_enc_head x --tr_r_enc_layers x  --tr_i_dec_head x --tr_i_dec_layers x --tr_l_dec_head x --tr_l_dec_layers x --name DHT_experiment_name --dataset_root <dataset_dir> --dataset_name IHD --batch_size xx --init_port xxxx
-```
-- Test our **CNN-DHT** model:
-```bash
-CUDA_VISIBLE_DEVICES=0 python test.py --model dht --light_use_mask --tr_r_enc_head x --tr_r_enc_layers x  --tr_i_dec_head x --tr_i_dec_layers x --tr_l_dec_head x --tr_l_dec_layers x --name DHT_experiment_name --dataset_root <dataset_dir> --dataset_name IHD --batch_size xx --init_port xxxx
+CUDA_VISIBLE_DEVICES=0 python test.py --model fssingleout --netG s_apswin_t_sgt_f3Dfourier --name experiment_name --dataset_root <dataset_dir> --dataset_mode hytall --batch_size 1 --init_port xxxx --n_frames 20
 ```
 
 ## Apply a pre-trained model
-- Download pre-trained models from [Google Drive](https://drive.google.com/file/d/1uQqveBSUfTmvA4FEWC_stAyf2oMS4UHC/view?usp=sharing) or [BaiduCloud](https://pan.baidu.com/s/1KxN0WYwaLBP1THatuzhq1A) (access code: vmrg), and put `latest_net_G.pth` in the directory `checkpoints/HT_2H9L_allihd` or `checkpoints/DHT_2H9L_allihd`. Run:
+- Download pre-trained models from [BaiduCloud](https://pan.baidu.com/s/1l4x-sOEwhCt6KwSOI5hnXg?pwd=p0k6) (access code: p0k6), and put `latest_net_G.pth` in the directory `checkpoints/s_apswin_t_sgt_f3Dfourier`. Run:
 ```bash
-# Our HT model
-CUDA_VISIBLE_DEVICES=0 python test.py --model ht --tr_r_enc_head 2 --tr_r_enc_layers 9 --name HT_2H9L_allihd --dataset_root <dataset_dir> --dataset_name IHD --batch_size xx --init_port xxxx
-# Our CNN-DHT model
-CUDA_VISIBLE_DEVICES=0 python test.py --model dht --light_use_mask --tr_r_enc_head 2 --tr_r_enc_layers 9  --tr_i_dec_head 2 --tr_i_dec_layers 9 --tr_l_dec_head 2 --tr_l_dec_layers 9 --name DHT_2H9L_allihd --dataset_root <dataset_dir> --dataset_name IHD --batch_size xx --init_port xxxx
+CUDA_VISIBLE_DEVICES=0 python test.py --model fssingleout --netG s_apswin_t_sgt_f3Dfourier --name s_apswin_t_sgt_f3Dfourier --dataset_root <dataset_dir> --dataset_mode hytall --batch_size 1 --init_port xxxx --n_frames 20
 ```
 ## Evaluation
-We provide the code in `ih_evaluation.py`. Run:
+To evaluate the spatial consistency, run:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python evaluation/ih_evaluation.py --dataroot <dataset_dir> --result_root  results/experiment_name/test_latest/images/ --evaluation_type our --dataset_name ALL
+CUDA_VISIBLE_DEVICES=0 python evaluation/ih_evaluation.py --dataroot <dataset_dir> --result_root results/experiment_name/test_latest/images/ --evaluation_type hyt --dataset_name HYT
 ```
-
-## Real composite image harmonnization
-More compared results can be found at [Google Drive](https://drive.google.com/file/d/1qkLdvS8rTng4bxWKSFjtfPgQ5SK2OvGa/view?usp=sharing) or [BaduCloud](https://pan.baidu.com/s/1mf4h4jOrVO9jFEthYsHyzw) (access code: n37b).
-
+To evaluate the temporal consistency, run:
+```bash
+python all_tc_evaluation.py --dataset_root <dataset_dir> --experiment_name experiment_name --mode 'v' --brightness_region 'foreground'
+```
 
 # Bibtex
 If you use this code for your research, please cite our papers.
