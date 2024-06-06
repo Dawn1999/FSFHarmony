@@ -1,0 +1,11 @@
+checkpoints/*
+__pycache__/*
+*/__pycache__/*
+*/*/__pycache__/*
+*/*/*/__pycache__/*
+*/.ipynb_checkpoints/*
+*/*/.ipynb_checkpoints/*
+results/*
+models/deformable/ops/functions/__pycache__/__init__.cpython-37.pyc
+models/deformable/ops/functions/__pycache__/ms_deform_attn_func.cpython-37.pyc
+models/lib/gmflow/gmflow_with_refine_sintel-3ed1cf48.pth
