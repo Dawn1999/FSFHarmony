@@ -27,7 +27,7 @@ class TrainOptions(BaseOptions):
         parser.add_argument('--epoch_count', type=int, default=1, help='the starting epoch count, we save the model by <epoch_count>, <epoch_count>+<save_latest_freq>, ...')
         parser.add_argument('--phase', type=str, default='train', help='train, val, test, etc')
         # training parameters
-        parser.add_argument('--niter', type=int, default=60, help='# of iter at starting learning rate')
+        parser.add_argument('--niter', type=int, default=40, help='# of iter at starting learning rate')
         parser.add_argument('--niter_decay', type=int, default=60, help='# of iter to linearly decay learning rate to zero')
         parser.add_argument('--beta1', type=float, default=0.5, help='momentum term of adam')
         parser.add_argument('--beta2', type=float, default=0.999, help='momentum term of adam')
