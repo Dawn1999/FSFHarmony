@@ -1,9 +1,3 @@
-# 示例：python all_tc_evaluation.py --dataset_root '../../datasets/HYouTube/' --experiment_name 's_apswin_t_sgt_f3Dfourier_1H6L_LT_LA_LP_v2' --mode 'v' --brightness_region 'foreground'
-# --dataset_root：数据集路径
-# --experiment_name：要评价的实验名
-# --mode：参与计算的图像模式。v为HSV中的V通道值；rgb为RGB图像；gray为灰度图像；hsv为HSV色彩空间图像
-# --plot：是否画变化趋势图。命令行中输入该参数则画图，不输入该参数则不画图。变化趋势图存于'results/experiment_name/test_latest/info/'目录下。
-# 指标会在终端print出来，也可以从'results/experiment_name/test_latest/info/tc_mew_mse_v.txt'第一行里查看
 import os.path
 import torch
 import torchvision.transforms.functional as tf
