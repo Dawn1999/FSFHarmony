@@ -36,21 +36,3 @@ To evaluate the temporal consistency, run:
 ```bash
 python all_tc_evaluation.py --dataset_root <dataset_dir> --experiment_name experiment_name --mode 'v' --brightness_region 'foreground'
 ```
-
-# Bibtex
-If you use this code for your research, please cite our papers.
-
-```
-@InProceedings{Guo_2021_ICCV,
-    author    = {Guo, Zonghui and Guo, Dongsheng and Zheng, Haiyong and Gu, Zhaorui and Zheng, Bing and Dong, Junyu},
-    title     = {Image Harmonization With Transformer},
-    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-    month     = {October},
-    year      = {2021},
-    pages     = {14870-14879}
-}
-```
-
-# Acknowledgement
-For some of the data modules and model functions used in this source code, we need to acknowledge the repositories of [DoveNet](https://github.com/bcmi/Image-Harmonization-Dataset-iHarmony4/tree/master/DoveNet), [CycleGAN](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix), [
-SpiralNet](https://github.com/zhenglab/spiralnet) and [IntrinsicHarmony](https://github.com/zhenglab/IntrinsicHarmony). 
